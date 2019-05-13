@@ -1,0 +1,50 @@
+@mixin aligning-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+$days: (mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 7);
+
+body {
+  margin: 0;
+  height: 100%;
+  @include aligning-center;
+  min-height: 100vh;
+}
+
+.calendar {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  display: grid;
+  grid-template-columns: repeat(7, 100px);
+  grid-template-rows: repeat(5, 100px);
+  grid-gap: 1px;
+}
+
+@for $totalDays from 28 through 31 {
+  @for $i from 1 through $totalDays {
+    .calendar-#{$totalDays} div:nth-child(#{$i}) {
+      @include aligning-center;
+      background: #eeeeee;
+      border: 1px black solid;
+      transition: .5s;
+      &:after {
+        content: "#{$i}";
+      }
+      
+      &:hover {
+        cursor: pointer;
+        background: pink;
+        transform: translateY(-20px);
+      }
+    }
+  }
+}
+
+@each $days, $number in $days {
+  div.calendar-#{$days} div:nth-child(1) {
+      grid-column-start: #{$number};
+  }
+}
