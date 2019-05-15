@@ -18,26 +18,32 @@ body {
   font-family: Arial, sans-serif;
   font-size: 30px;
   display: grid;
+  justify-content: center;
   grid-template-columns: repeat(7, 100px);
-  grid-template-rows: repeat(5, 100px);
   grid-gap: 1px;
+  
+  div {
+      display: none;
+      line-height: 100px;
+      text-align: center;
+      background: #eeeeee;
+      border: 1px black solid;
+      transition: .5s;
+     
+      &:hover {
+        cursor: pointer;
+        background: pink;
+        transform: translateY(-20px);
+      }
+  }
 }
 
 @for $totalDays from 28 through 31 {
   @for $i from 1 through $totalDays {
     .calendar-#{$totalDays} div:nth-child(#{$i}) {
-      @include aligning-center;
-      background: #eeeeee;
-      border: 1px black solid;
-      transition: .5s;
+      display:block;
       &:after {
         content: "#{$i}";
-      }
-      
-      &:hover {
-        cursor: pointer;
-        background: pink;
-        transform: translateY(-20px);
       }
     }
   }
